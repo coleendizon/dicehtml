@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>Random Number Generator</title>
+
+<script>
+function callRest(){
+var obj, dbParam, xmlhttp, myObj, x, txt = "";
+xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+	myObj = JSON.parse(this.responseText);
+	  document.getElementById("textbox").value = myObj;
+
+	 for (x in myObj) {
+          	  txt  += myObj[x].dice + ", ";
+        	}
+                    document.getElementById("textbox").value= txt;
+	
+    }
+};
+
+xmlhttp.open("GET", "http://localhost:8080/randomnumber",true);
+xmlhttp.send();}
+</script>
+</head>
+
+<body>
+
+<button onclick="callRest()">Generate</button> 
+<textarea id = "textbox"> </textarea>
+</body>
+
+</html>
